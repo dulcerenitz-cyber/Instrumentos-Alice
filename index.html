@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instrumentos Alice | Tienda de Música</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <h1>Instrumentos Alice</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#productos" class="nav-link">Catálogo</a></li>
+                <li><a href="#pagos" class="nav-link">Pagos</a></li>
+                <li><a href="#contacto" class="nav-link">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="cart-icon">
+            🛒 <span id="cart-count">0</span>
+        </div>
+    </header>
+
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <span class="hero-badge">Nueva colección 2026</span>
+            <h2>Despierta tu pasión por la música</h2>
+            <p>Instrumentos de calidad para principiantes y profesionales, con un estilo moderno y acogedor.</p>
+            <div class="hero-actions">
+                <a href="#productos" class="btn-primary">Explorar Catálogo</a>
+                <a href="#pagos" class="btn-secondary">Ver pagos seguros</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="benefit-grid">
+            <div class="benefit-card">
+                <h3>Asesoría personalizada</h3>
+                <p>Te ayudamos a elegir el instrumento ideal según tu nivel y tus metas musicales.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>Calidad garantizada</h3>
+                <p>Trabajamos con equipos cuidadosamente seleccionados para ofrecerte una experiencia confiable.</p>
+            </div>
+            <div class="benefit-card">
+                <h3>Pago seguro</h3>
+                <p>Tu compra queda protegida con métodos rápidos, seguros y transparentes.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="productos" class="products-section">
+        <div class="section-heading">
+            <h2>Instrumentos Destacados</h2>
+            <p>Descubre piezas que combinan sonido, diseño y calidad.</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?auto=format&fit=crop&w=700&q=80" alt="Violín acústico elegante">
+                <h3>Violín Acústico 4/4 Alice</h3>
+                <p class="description">Ideal para estudiantes y conciertos con un sonido brillante.</p>
+                <p class="price">$120.00</p>
+                <button class="btn-buy">Añadir al carrito</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=700&q=80" alt="Guitarra acústica profesional">
+                <h3>Guitarra Acústica Profesional</h3>
+                <p class="description">Excelente resonancia y comodidad al tocar en cualquier estilo.</p>
+                <p class="price">$150.00</p>
+                <button class="btn-buy">Añadir al carrito</button>
+            </div>
+
+            <div class="product-card">
+                <img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=800&q=80" alt="Microfono de estudio profesional">
+                <h3>Microfono de Estudio Profesional</h3>
+                <p class="description">Captura el sonido con precisión y calidad profesional para grabaciones y actuaciones.</p>
+                <p class="price">$40.00</p>
+                <button class="btn-buy">Añadir al carrito</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="pagos" class="payment-section">
+        <div class="payment-card">
+            <div class="payment-icon">
+                <span class="paypal-pill"><span>P</span>ayPal</span>
+            </div>
+            <h3>Pago Seguro con PayPal</h3>
+            <p>Aceptamos pagos rápidos y seguros a través de PayPal para que tu compra sea muy sencilla.</p>
+            <p class="paypal-email">Correo de pago: <strong>dulcerenitz@gmail.com</strong></p>
+            <button class="btn-paypal" id="open-paypal-modal">Pagar con PayPal</button>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="footer-content">
+            <h3>Instrumentos Alice</h3>
+            <p>Tu tienda de confianza para despertar tu pasión por la música.</p>
+            <div class="contact-info">
+                <p>Teléfono: <a href="tel:04164659068">0416-4659068</a></p>
+                <p>Correo: <a href="mailto:dulcerenitz@gmail.com">dulcerenitz@gmail.com</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Instrumentos Alice. Todos los derechos reservados.</p>
+
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartCountElement = document.getElementById('cart-count');
+            const addButtons = document.querySelectorAll('.btn-buy');
+
+            let cartCount = Number(localStorage.getItem('cart-count') || 0);
+            cartCountElement.textContent = cartCount;
+
+            addButtons.forEach((button) => {
+                button.addEventListener('click', () => {
+                    cartCount += 1;
+                    cartCountElement.textContent = cartCount;
+                    localStorage.setItem('cart-count', cartCount);
+
+                    const originalText = button.textContent;
+                    button.classList.add('added');
+                    button.textContent = 'Añadido ✓';
+
+                    setTimeout(() => {
+                        button.classList.remove('added');
+                        button.textContent = originalText;
+                    }, 1200);
+                });
+            });
+        });
+    </script>
+
+    <!-- Ventana Modal del Carrito (Oculta por defecto) -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>🛒 Tu Carrito de Compras</h2>
+            <div id="cart-items-container">
+                <!-- Los productos agregados aparecerán aquí dinámicamente -->
+            </div>
+            <div class="cart-total">
+                <p>Total a pagar: <strong id="cart-total-price">$0.00</strong></p>
+            </div>
+            <button type="button" class="btn-checkout">Pagar con PayPal</button>
+        </div>
+    </div>
+
+    <!-- Modal de Pago con PayPal -->
+    <div id="paypal-modal" class="paypal-modal">
+        <div class="paypal-modal-content">
+            <span class="close-paypal-modal">&times;</span>
+            <h2>Pago con PayPal</h2>
+            <p>Serás redirigido a PayPal para completar tu compra de forma segura.</p>
+            <div class="paypal-modal-actions">
+                <a href="https://paypal.me" target="_blank" class="btn-paypal-modal">Continuar al pago</a>
+                <button class="btn-cancel-modal" id="cancel-paypal-modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Interactividad del Carrito -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartCountElement = document.getElementById('cart-count');
+            const addButtons = document.querySelectorAll('.btn-buy');
+            const cartIcon = document.querySelector('.cart-icon');
+            const cartModal = document.getElementById('cart-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+            const openPaypalModalButton = document.getElementById('open-paypal-modal');
+            const cartCheckoutButton = document.querySelector('.btn-checkout');
+            const paypalModal = document.getElementById('paypal-modal');
+            const closePaypalModalButton = document.querySelector('.close-paypal-modal');
+            const cancelPaypalModalButton = document.getElementById('cancel-paypal-modal');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            // Lista para guardar los productos del carrito
+            let cart = JSON.parse(localStorage.getItem('cart-products')) || [];
+
+            // Actualizar la vista inicial
+            updateCartUI();
+
+            // Agregar producto al hacer clic
+            addButtons.forEach((button) => {
+                button.addEventListener('click', (e) => {
+                    const card = e.target.closest('.product-card');
+                    const title = card.querySelector('h3').textContent;
+                    const priceText = card.querySelector('.price').textContent;
+                    const price = parseFloat(priceText.replace('$', ''));
+                    const image = card.querySelector('img').src;
+
+                    // Añadir al array del carrito
+                    cart.push({ title, price, image });
+                    saveAndRefresh();
+
+                    // Animación visual en el botón
+                    const originalText = button.textContent;
+                    button.classList.add('added');
+                    button.textContent = '¡Añadido! ✓';
+
+                    // Animación de latido en el icono del carrito superior
+                    cartIcon.classList.add('bounce');
+                    setTimeout(() => cartIcon.classList.remove('bounce'), 500);
+
+                    setTimeout(() => {
+                        button.classList.remove('added');
+                        button.textContent = originalText;
+                    }, 1500);
+                });
+            });
+
+            // Abrir modal al hacer clic en el carrito superior
+            cartIcon.addEventListener('click', () => {
+                cartModal.style.display = 'flex';
+            });
+
+            // Cerrar modal con la "X"
+            closeModal.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+            });
+
+            // Cerrar modal haciendo clic fuera de la caja blanca
+            window.addEventListener('click', (e) => {
+                if (e.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+
+            openPaypalModalButton.addEventListener('click', () => {
+                paypalModal.style.display = 'flex';
+            });
+
+            if (cartCheckoutButton) {
+                cartCheckoutButton.addEventListener('click', () => {
+                    cartModal.style.display = 'none';
+                    paypalModal.style.display = 'flex';
+                });
+            }
+
+            const closePaypalModal = () => {
+                paypalModal.style.display = 'none';
+            };
+
+            closePaypalModalButton.addEventListener('click', closePaypalModal);
+            cancelPaypalModalButton.addEventListener('click', closePaypalModal);
+
+            window.addEventListener('click', (e) => {
+                if (e.target === paypalModal) {
+                    closePaypalModal();
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href');
+                    if (targetId && targetId.startsWith('#')) {
+                        const targetSection = document.querySelector(targetId);
+                        if (targetSection) {
+                            e.preventDefault();
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }
+                });
+            });
+
+            function saveAndRefresh() {
+                localStorage.setItem('cart-products', JSON.stringify(cart));
+                updateCartUI();
+            }
+
+            function updateCartUI() {
+                // Actualizar número en el icono
+                cartCountElement.textContent = cart.length;
+
+                // Limpiar contenedor del modal
+                cartItemsContainer.innerHTML = '';
+
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="empty-cart">Tu carrito está vacío.</p>';
+                    cartTotalPrice.textContent = '$0.00';
+                    return;
+                }
+
+                let total = 0;
+                cart.forEach((item, index) => {
+                    total += item.price;
+                    const itemElement = document.createElement('div');
+                    itemElement.classList.add('cart-item');
+                    itemElement.innerHTML = `
+                        <img src="${item.image}" alt="${item.title}">
+                        <div class="cart-item-details">
+                            <h4>${item.title}</h4>
+                            <p>$${item.price.toFixed(2)}</p>
+                        </div>
+                        <button class="remove-item" data-index="${index}">🗑️</button>
+                    `;
+                    cartItemsContainer.appendChild(itemElement);
+                });
+
+                cartTotalPrice.textContent = `$${total.toFixed(2)}`;
+
+                // Botones para eliminar productos individuales
+                document.querySelectorAll('.remove-item').forEach(delBtn => {
+                    delBtn.addEventListener('click', (e) => {
+                        const index = e.target.getAttribute('data-index');
+                        cart.splice(index, 1);
+                        saveAndRefresh();
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
